@@ -1,0 +1,75 @@
+// Container cho form register
+.registerContainer {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+
+  @media (max-width: 768px) {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    margin: 0 0 30px 0;
+    color: #333;
+    font-size: 28px;
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+// Form styles
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// Form group (label + input + error)
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  input {
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    outline: none;
+
+    &::placeholder {
+      color: #999;
+    }
+
+    &:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    &:invalid {
+      border-color: #e0e0e0;
+    }
+  }
+}
+
+// Error message
+.error {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: -4px;
+}
+
+// Submit button container
+.submitBtn {
+  margin-top: 10px;
+}

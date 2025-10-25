@@ -1,0 +1,88 @@
+.header {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.logo {
+  text-decoration: none; // Bỏ gạch chân của link
+  transition: transform 0.2s ease; // Hiệu ứng khi hover
+
+  &:hover {
+    transform: scale(1.05); // Phóng to nhẹ khi hover
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+  }
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+}
+
+.userPlaceholder {
+  cursor: pointer;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  span {
+    display: inline-block;
+  }
+}
+
+// Style cho các nút đăng nhập/đăng ký
+.authButtons {
+  display: flex;
+  gap: 12px; // Khoảng cách giữa 2 nút
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .userName {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+  }
+}
