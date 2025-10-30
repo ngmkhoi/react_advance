@@ -11,9 +11,9 @@ const httpClient = axios.create({
 // Request interceptor
 httpClient.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('access_token');
-        if(token) {
-            config.headers['Authorization'] = `Bearer ${token}`;
+        const accessToken = localStorage.getItem('accessToken');
+        if(accessToken) {
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         return config;
     },
@@ -26,18 +26,47 @@ httpClient.interceptors.request.use(
 httpClient.interceptors.response.use(
     (response) => {
         return response.data
-    },(error) => {
-        // Log error để debug
-        // console.error('HTTP Error:', {
-        //     status: error.response?.status,
-        //     statusText: error.response?.statusText,
-        //     data: error.response?.data,
-        //     url: error.config?.url
-        // });
+    },
+    async (error) => {
+        const originalRequest = error.config;
 
-        const errorMessage = error.response?.data.message || 'An error occurred';
-        // Giữ nguyên error object để preserve status code
-        error.message = errorMessage;
+        if(error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+
+            try {
+                const refreshToken = localStorage.getItem('refreshToken');
+
+                if(!refreshToken) {
+                    localStorage.clear();
+                    window.location.href = '/login';
+                    return Promise.reject(error);
+                }
+
+                const response = await axios.post(
+                    `${import.meta.env.VITE_BASE_API}/auth/refresh-token`,
+                    { refresh_token: refreshToken },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                );
+
+                const { access_token, refresh_token } = response.data.data;
+
+                localStorage.setItem('accessToken', access_token);
+                localStorage.setItem('refreshToken', refresh_token);
+
+                originalRequest.headers['Authorization'] = `Bearer ${access_token}`;
+
+                return httpClient(originalRequest);
+            } catch (refreshError){
+                localStorage.clear();
+                window.location.href = '/login';
+                return Promise.reject(refreshError);
+            }
+        }
+
         return Promise.reject(error);
     }
 )
@@ -55,5 +84,5 @@ const http = {
     patch: (path, data, config) => _send("patch", path, data, config),
     del: (path, config) => _send("delete", path, null, config),
 };
-    
+
 export { http };

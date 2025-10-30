@@ -15,7 +15,7 @@ export const authSlice = createSlice({
             state.currentUser = null;
             state.loading = false;
             state.error = null;
-            localStorage.removeItem('access_token'); // Clear token
+            localStorage.removeItem('accessToken');
         },
     },
     extraReducers: (builder) => {
@@ -33,6 +33,9 @@ export const authSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message;
                 state.currentUser = null;
+                // Log lỗi để debug (bao gồm cả lỗi 401)
+                // console.log('getCurrentUser rejected:', action.error);
+                // console.log('Error message:', action.error.message);
             })
     }
 })

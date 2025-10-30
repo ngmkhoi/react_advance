@@ -18,9 +18,10 @@ function Login() {
     });
 
     const onSubmit = async (data) => {
-        const { access_token } = await authService.login(data)
+        const { access_token, refresh_token } = await authService.login(data)
         if(access_token){
-            localStorage.setItem('access_token', access_token)
+            localStorage.setItem('accessToken', access_token)
+            localStorage.setItem('refreshToken', refresh_token)
             await dispatch(getCurrentUser())
             const redirectTo = searchParams.get('redirectTo') || '/'
             navigate(redirectTo)

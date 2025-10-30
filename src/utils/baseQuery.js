@@ -4,7 +4,7 @@ const baseQuery = fetchBaseQuery(
     {
         baseUrl: import.meta.env.VITE_BASE_API,
         prepareHeaders: (headers) => {
-            headers.set('Authorization', `Bearer ${localStorage.getItem('access_token') || ''}`);
+            headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken') || ''}`);
             return headers;
         }
     }
