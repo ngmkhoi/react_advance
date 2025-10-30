@@ -1,7 +1,7 @@
 import  { useEffect }  from"react";
 import { useDispatch, useSelector }  from "react-redux";
 import { getCurrentUser } from "@/services/auth/authService";
-import { selectCurrentUser } from "./selector";
+import { selectCurrentUser, selectUserLoading } from "./selector";
 
 
 /**
@@ -13,9 +13,10 @@ import { selectCurrentUser } from "./selector";
 function useFetchCurrentUser() {
     const dispatch = useDispatch();
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('access_token');
         if (token) {
-            dispatch(getCurrentUser()); // ✅ Revalidate mỗi lần mount
+
+            dispatch(getCurrentUser()); //Revalidate mỗi lần mount
         }
     }, [dispatch]);
 }
@@ -27,10 +28,19 @@ function useFetchCurrentUser() {
  * - Tự động re-render component khi danh sách sản phẩm thay đổi
  */
 function useCurrentUser() {
-    const currentUser = useSelector(selectCurrentUser);
 
+    const currentUser = useSelector(selectCurrentUser);
     return currentUser;
 }
 
+/**
+ * Custom hook để lấy loading state của auth
+ * @returns {boolean} Loading state
+ */
+function useAuthLoading() {
+    const loading = useSelector(selectUserLoading);
+    return loading;
+}
 
-export { useFetchCurrentUser, useCurrentUser };
+
+export { useFetchCurrentUser, useCurrentUser, useAuthLoading };

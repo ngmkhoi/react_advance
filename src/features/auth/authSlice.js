@@ -15,7 +15,7 @@ export const authSlice = createSlice({
             state.currentUser = null;
             state.loading = false;
             state.error = null;
-            localStorage.removeItem('token'); // Clear token
+            localStorage.removeItem('access_token'); // Clear token
         },
     },
     extraReducers: (builder) => {
@@ -37,7 +37,7 @@ export const authSlice = createSlice({
     }
 })
 
-// export const { } = authSlice.actions
+export const { logout } = authSlice.actions
 export const selectCount = (state) => state.counter.value;
 
 export default authSlice;

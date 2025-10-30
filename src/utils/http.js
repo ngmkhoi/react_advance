@@ -11,7 +11,7 @@ const httpClient = axios.create({
 // Request interceptor
 httpClient.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('access_token');
         if(token) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }
@@ -27,8 +27,18 @@ httpClient.interceptors.response.use(
     (response) => {
         return response.data
     },(error) => {
+        // Log error để debug
+        // console.error('HTTP Error:', {
+        //     status: error.response?.status,
+        //     statusText: error.response?.statusText,
+        //     data: error.response?.data,
+        //     url: error.config?.url
+        // });
+
         const errorMessage = error.response?.data.message || 'An error occurred';
-        throw new Error(errorMessage);
+        // Giữ nguyên error object để preserve status code
+        error.message = errorMessage;
+        return Promise.reject(error);
     }
 )
 

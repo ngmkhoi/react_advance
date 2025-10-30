@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Register.module.scss';
 import { useForm } from 'react-hook-form';
 import Button from '../../../components/Button/index';
+import * as authService from '@/services/auth/authService'
 
 function Register() {
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: {errors},  watch} = useForm({
         defaultValues: {
             firstName: "",
@@ -14,14 +16,21 @@ function Register() {
         }
     });
 
-    const onSubmit = data => {
-        console.log(data);
-        // Handle registration logic here   
+    const onSubmit = async (data) => {
+        // const {access_token} = await authService.register(data);
+        // if(access_token){
+        //     localStorage.setItem('access_token', access_token);
+        //     navigate('/login');
+        // }
+        try{
+            await authService.register(data)
+            navigate('/login')
+        }catch (error) {
+            console.error('Registration failed:', error);
+        }
+
     }
-
-    console.log(errors);
     
-
     return(
         <div className={styles.registerContainer}>
             <h1>Register</h1>

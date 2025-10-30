@@ -7,7 +7,8 @@ import DefaultLayout from "@/layouts/DefaultLayout";
 import AuthLayout from "@/layouts/AuthLayout";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
-
+import Profile from "@/pages/Profile";
+import PrivateRoute from "@/components/PrivateRoute/index.jsx";
 
 function AppRoute(){
     return(
@@ -20,6 +21,11 @@ function AppRoute(){
                     <Route path="/" element={<ProductList />} />
                     <Route path="/counter" element={<Counter/>} />
                     <Route path="/provinces" element={<ProvincesList />} />
+
+                    {/* Private routes - cần login mới vào được */}
+                    <Route element={<PrivateRoute />}>
+                        <Route path="/profile" element={<Profile />} />
+                    </Route>
                 </Route>
 
                 {/* Routes sử dụng AuthLayout cho đăng nhập/đăng ký */}

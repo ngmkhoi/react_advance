@@ -1,23 +1,21 @@
-// Container chính cça trang login
+
 .loginContainer {
   width: 100%;
-  max-width: 450px; // GiÛi h¡n chiÁu rÙng form
+  max-width: 450px;
 }
 
-// Box chéa form ng nh­p
 .loginBox {
   background: white;
-  border-radius: 12px; // Bo góc ¹p
+  border-radius: 12px;
   padding: 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); // Õ bóng nh¹
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 
-  // Responsive cho mobile
   @media (max-width: 768px) {
     padding: 30px 20px;
   }
 }
 
-// Tiêu Á
+
 .title {
   margin: 0 0 8px 0;
   font-size: 28px;
@@ -26,7 +24,6 @@
   text-align: center;
 }
 
-// Phå Á
 .subtitle {
   margin: 0 0 30px 0;
   font-size: 14px;
@@ -34,14 +31,12 @@
   text-align: center;
 }
 
-// Form
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px; // Kho£ng cách giïa các ph§n tí
+  gap: 20px;
 }
 
-// Nhóm input (label + input)
 .formGroup {
   display: flex;
   flex-direction: column;
@@ -62,8 +57,8 @@
 
     &:focus {
       outline: none;
-      border-color: #667eea; // Màu border khi focus
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); // HiÇu éng glow
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
 
     &::placeholder {
@@ -72,7 +67,6 @@
   }
 }
 
-// Nút submit
 .submitBtn {
   padding: 14px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -85,16 +79,15 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    transform: translateY(-2px); // Nâng lên khi hover
+    transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
   }
 
   &:active {
-    transform: translateY(0); // Nh¥n xuÑng khi click
+    transform: translateY(0);
   }
 }
 
-// Link ng ký
 .registerLink {
   text-align: center;
   font-size: 14px;
